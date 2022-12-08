@@ -1,0 +1,14 @@
+.home {
+  box-shadow: 0 0.125rem 0.375rem rgb(0 0 0 / 6%);
+  border-radius: 0.25rem;
+  background-color: var(--bg-primary);
+  padding: 0.3125rem 0.75rem 0.25rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.home:hover {
+  transition: all 0.25s ease-in-out;
+  background-color: var(--text-secondary);
+  color: var(--bg-primary);
+}
