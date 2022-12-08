@@ -1,0 +1,14 @@
+.header {
+  background-color: var(--bg-primary);
+  /* stylelint-disable */
+  padding: 34.58px var(--page-padding) 39px var(--page-padding);
+  /* stylelint-enable */
+}
+
+.logo,
+.logo path {
+  /* stylelint-disable */
+  width: 131.82px;
+  height: 49.03px;
+  /* stylelint-enable */
+}
