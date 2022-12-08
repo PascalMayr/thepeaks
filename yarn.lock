@@ -5593,6 +5593,13 @@ stylelint-config-standard@^29.0.0:
   dependencies:
     stylelint-config-recommended "^9.0.0"
 
+stylelint-no-px@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stylelint-no-px/-/stylelint-no-px-1.0.1.tgz#4d137c60a02c60514a958b43d3bb41805405a3ca"
+  integrity sha512-33+Gd5WFeSvEiOV8IwWMVgjzYieFg/Q4ETKeZkahSYl2V7+WMtgNT32IYYEspN402ZJv16bOciwEnG1GY2qrPA==
+  dependencies:
+    postcss-value-parser "^3.3.0 || ^4.0.2"
+
 stylelint@^14.16.0:
   version "14.16.0"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.16.0.tgz#8e1a424f4b9852e59089f95de306734d70e5048b"
