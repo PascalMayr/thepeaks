@@ -11,6 +11,16 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>The Peaks</title>
         <meta name="description" content="Latest News" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com/"
+          crossOrigin="true"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.cdnfonts.com/"
+          crossOrigin="true"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link

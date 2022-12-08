@@ -1,5 +1,6 @@
 /* loading font for unix based systems excluding MacOs */
 @import url("https://fonts.cdnfonts.com/css/georgia");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 html,
 body {
