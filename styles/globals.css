@@ -13,6 +13,7 @@ body {
 :root {
   /* colors */
   --bg-primary: rgb(9 53 123);
+  --bg-secondary: rgb(33 83 163);
   --text-primary: rgba(5 4 4 87%);
   --text-secondary: rgb(255 255 255);
   --icon-primary: rgb(255 255 255);
@@ -24,4 +25,8 @@ body {
   /* spacing */
   --page-padding: 10.3125rem;
   --footer-height: 15.1875rem;
+
+  /* fonts */
+  --font-family-primary: georgia, sans-serif;
+  --font-family-secondary: roboto, sans-serif;
 }
