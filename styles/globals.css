@@ -28,7 +28,7 @@ html {
   --article-sports-color: rgb(245 0 87);
   --article-culture-color: rgb(255 202 40);
   --article-lifestyle-color: rgb(33 150 243);
-  --select-border-color: rgba(0 0 0 42%);
+  --select-border-color: rgba(0 0 0 / 42%);
 
   /* spacing */
   --page-padding: 10.3125rem;
