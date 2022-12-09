@@ -5,10 +5,19 @@
   padding: 0.3125rem 0.75rem 0.25rem;
   color: var(--text-secondary-color);
   text-decoration: none;
+  width: 10rem;
 }
 
 .home:hover {
   transition: all 0.25s ease-in-out;
   background-color: var(--text-secondary-color);
   color: var(--bg-primary-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  margin-top: 2.75rem;
+  margin-bottom: 2.75rem;
 }

@@ -1,7 +1,5 @@
 .page {
   padding-left: var(--page-padding);
   padding-right: var(--page-padding);
-  /* stylelint-disable */
-  min-height: calc(100vh - var(--footer-height) - 126px);
-  /* stylelint-enable */
+  min-height: calc(100vh - var(--footer-height) - 7.875rem);
 }

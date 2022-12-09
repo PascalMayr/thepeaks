@@ -4,6 +4,7 @@
     "stylelint-no-px"
   ],
   "rules": {
-    "meowtec/no-px": true
+    "meowtec/no-px": true,
+    "string-quotes": "single"
   }
 }
