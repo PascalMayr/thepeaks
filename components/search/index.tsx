@@ -9,7 +9,9 @@ const Search: React.FC = () => {
   const handleFocus = useCallback(() => {
     if (!focused) setFocused(true)
   }, [focused])
-  const handleUnfocus = useCallback(() => setFocused(false), [])
+  const handleUnfocus = useCallback(() => {
+    if (focused) setFocused(false)
+  }, [focused])
   const handleSearch = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
     []
