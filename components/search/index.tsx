@@ -6,14 +6,14 @@ import classNames from 'classnames'
 const Search: React.FC = () => {
   const [search, setSearch] = useState<string>('')
   const [focused, setFocused] = useState<boolean>(false)
-  const handleClick = useCallback(() => setFocused(!focused), [focused])
+  const handleFocus = useCallback(() => setFocused(!focused), [focused])
   const handleSearch = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
     []
   )
   return (
     <div
-      onClick={handleClick}
+      onClick={handleFocus}
       className={classNames(styles.search, focused && styles.focused)}
     >
       <div className={styles.container}>
@@ -25,6 +25,7 @@ const Search: React.FC = () => {
             onChange={handleSearch}
             type="text"
             value={search}
+            onBlur={handleFocus}
           />
         )}
         <SearchIcon className={styles.icon} />
