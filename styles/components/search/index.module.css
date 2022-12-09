@@ -1,9 +1,9 @@
 .search {
   height: 2.0625rem;
   width: 5.625rem;
-  border-bottom: 0.125rem solid var(--text-secondary);
-  fill: var(--text-secondary);
-  color: var(--text-secondary);
+  border-bottom: 0.125rem solid var(--text-secondary-color);
+  fill: var(--text-secondary-color);
+  color: var(--text-secondary-color);
   position: absolute;
   bottom: 0;
   right: var(--page-padding);
@@ -13,7 +13,7 @@
 
 .focused {
   transition: all 0.25s ease-in-out;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-secondary-color);
   width: 18.75rem;
   height: 2.625rem;
 }
@@ -38,7 +38,7 @@
   outline: none;
   width: calc(100% - 7.875rem);
   height: calc(100% - 0.125rem);
-  color: var(--text-primary);
+  color: var(--text-primary-color);
   font-family: var(--font-family-secondary);
   /* stylelint-disable */
   padding-left: 36.5px;
@@ -50,6 +50,6 @@
 
 /* input placeholder */
 .input::placeholder {
-  color: var(--text-primary);
+  color: var(--text-primary-color);
   opacity: 0.4;
 }
