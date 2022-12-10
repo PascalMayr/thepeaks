@@ -6,9 +6,13 @@ import Select from '../select'
 
 interface ListHeaderProps {
   title: string
+  hideBookmarkButton?: boolean
 }
 
-const ListHeader: React.FC<ListHeaderProps> = ({ title }) => {
+const ListHeader: React.FC<ListHeaderProps> = ({
+  title,
+  hideBookmarkButton,
+}) => {
   const router = useRouter()
   const sortOptions = ['Newest first', 'Oldest first']
   const selectHandler = (selectedIndex: number) => {
@@ -26,9 +30,11 @@ const ListHeader: React.FC<ListHeaderProps> = ({ title }) => {
     <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
       <div className={styles['bookmark-container']}>
-        <Link href="/bookmarks">
-          <BookmarkButton title="View Bookmark" />
-        </Link>
+        {!hideBookmarkButton && (
+          <Link href="/bookmarks">
+            <BookmarkButton title="View Bookmark" />
+          </Link>
+        )}
         <Select options={sortOptions} onSelect={selectHandler} />
       </div>
     </div>
