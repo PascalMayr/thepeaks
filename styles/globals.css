@@ -1,5 +1,41 @@
-@import url('https://fonts.cdnfonts.com/css/georgia');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* Georgia - only loaded  */
+@font-face {
+  font-family: georgia;
+  font-style: normal;
+  font-weight: 400;
+  /* stylelint-disable */
+  src: local('Georgia'),
+    url('https://fonts.cdnfonts.com/s/19225/Georgia-PersonalUse.woff')
+      format('woff');
+  /* stylelint-enable */
+  font-display: swap;
+}
+
+/* Roboto */
+
+/* latin-ext */
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  /* stylelint-disable */
+  src: url('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7GxKKTU1Kvnz.woff2')
+    format('woff2');
+  /* stylelint-enable */
+}
+
+/* latin */
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  /* stylelint-disable */
+  src: url('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2')
+    format('woff2');
+  /* stylelint-enable */
+}
 
 *,
 html,
