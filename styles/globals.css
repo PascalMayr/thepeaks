@@ -16,6 +16,10 @@ html {
   /* stylelint-enable */
 }
 
+a {
+  text-decoration: none;
+}
+
 /* variables */
 :root {
   /* colors */
