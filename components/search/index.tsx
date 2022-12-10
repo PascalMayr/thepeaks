@@ -2,6 +2,8 @@ import styles from '../../styles/components/search/index.module.css'
 import SearchIcon from '../../assets/search.svg'
 import { ChangeEvent, useCallback, useState } from 'react'
 import classNames from 'classnames'
+import { debounce } from 'lodash'
+import { useRouter } from 'next/router'
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState<string>('')
@@ -12,9 +14,28 @@ const Search: React.FC = () => {
   const handleUnfocus = useCallback(() => {
     if (focused) setFocused(false)
   }, [focused])
+  const router = useRouter()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSave = useCallback(
+    debounce((searchValue: string) => {
+      router.push({
+        query: { ...router.query, q: searchValue },
+        pathname: '/search',
+      })
+    }, 700),
+    [router]
+  )
   const handleSearch = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
-    []
+    (value: string) => {
+      setSearch(value)
+      debouncedSave(value)
+    },
+    [debouncedSave]
+  )
+
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value),
+    [handleSearch]
   )
   return (
     <div
@@ -28,7 +49,7 @@ const Search: React.FC = () => {
             autoFocus
             placeholder="Search all news"
             className={styles.input}
-            onChange={handleSearch}
+            onChange={onChange}
             type="text"
             value={search}
             onBlur={handleUnfocus}
