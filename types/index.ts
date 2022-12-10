@@ -17,6 +17,10 @@ export interface Result {
   isHosted: boolean
   pillarId: string
   pillarName: Pillar
+  fields: {
+    thumbnail?: string
+    trailText: string
+  }
 }
 
 export interface ContentResponse {

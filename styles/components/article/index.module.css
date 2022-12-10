@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.news {
+  background-color: var(--bg-primary-color);
+  padding: 0.6875rem 0.625rem 0.5625rem;
+  color: var(--text-secondary-color);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  height: 42.46%;
+  width: calc(100% - 1.25rem);
+  opacity: 0.9;
+}
+
+.web-title {
+  font-family: var(--font-family-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.8125rem;
+}
+
+.trail-text {
+  font-family: var(--font-family-secondary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.0063rem;
+}
+
+.link {
+  box-sizing: border-box;
+}

@@ -1,0 +1,10 @@
+.news {
+  height: calc(100% - 1.25rem);
+  opacity: 1;
+}
+
+.web-title {
+  font-size: 1.125rem;
+  line-height: 1.6875rem;
+  letter-spacing: 0.0039rem;
+}

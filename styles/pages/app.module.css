@@ -2,4 +2,5 @@
   padding-left: var(--page-padding);
   padding-right: var(--page-padding);
   min-height: calc(100vh - var(--footer-height) - 7.875rem);
+  margin-bottom: 6.5625rem;
 }

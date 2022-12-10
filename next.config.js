@@ -10,6 +10,9 @@ const nextConfig = {
     })
     return config
   },
+  images: {
+    domains: ['media.guim.co.uk'],
+  },
 }
 
 module.exports = nextConfig

@@ -14,7 +14,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({
   hideBookmarkButton,
 }) => {
   const router = useRouter()
-  const sortOptions = ['Newest first', 'Oldest first']
+  const sortOptions: string[] = ['Newest first', 'Oldest first']
   const selectHandler = (selectedIndex: number) => {
     const oldOrderBy = router.query['order-by']
     const newOrderBy = sortOptions[selectedIndex].split(' ')[0].toLowerCase()
