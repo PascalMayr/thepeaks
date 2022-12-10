@@ -61,6 +61,7 @@ a {
   /* colors */
   --bg-primary-color: rgb(9 53 123);
   --bg-secondary-color: rgb(33 83 163);
+  --bg-tertiary-color: rgb(255 255 255);
   --text-primary-color: rgba(5 4 4 87%);
   --text-secondary-color: rgb(255 255 255);
   --icon-primary-color: rgb(255 255 255);
