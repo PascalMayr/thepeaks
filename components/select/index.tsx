@@ -3,11 +3,13 @@ import {
   KeyboardEvent,
   MouseEvent,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
 import classNames from 'classnames'
 import Arrow from '../../assets/arrow.svg'
+import { useRouter } from 'next/router'
 
 interface SelectProps {
   options: string[]
@@ -61,6 +63,13 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
       )),
     [options, handleSelect]
   )
+
+  // set default again if page reloads
+  const router = useRouter()
+  useEffect(() => {
+    if (!router.query['order-by']) setSelected(0)
+  }, [router])
+
   return (
     <div
       tabIndex={0}
