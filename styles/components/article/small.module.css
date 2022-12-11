@@ -12,6 +12,18 @@
   letter-spacing: 0.0039rem;
 }
 
+.no-thumbnail-container {
+  background-color: var(--article-bg-placeholder);
+}
+
+.placeholder {
+  display: flex;
+  height: calc(100% - 42.46%);
+  align-items: cent4r;
+  align-items: center;
+  justify-content: center;
+}
+
 .not-top-news {
   height: 38.62%;
 }

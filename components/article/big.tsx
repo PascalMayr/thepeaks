@@ -3,6 +3,7 @@ import { ArticleProps } from '.'
 import styles from '../../styles/components/article/index.module.css'
 import bigStyles from '../../styles/components/article/big.module.css'
 import classNames from 'classnames'
+import Logo from '../../assets/logo.svg'
 import ResponsiveEllipsis from '../responsiveEllipsis'
 
 export enum ArticleVariation {
@@ -13,7 +14,12 @@ export enum ArticleVariation {
 
 const ArticleBig: React.FC<ArticleProps> = ({ fields, webTitle, top }) => {
   return (
-    <article className={styles.container}>
+    <article
+      className={classNames(
+        styles.container,
+        !fields?.thumbnail && bigStyles['no-thumbnail-container']
+      )}
+    >
       <div className={styles.news}>
         <ResponsiveEllipsis
           text={webTitle}
@@ -34,14 +40,18 @@ const ArticleBig: React.FC<ArticleProps> = ({ fields, webTitle, top }) => {
           dangerouslySetInnerHTML={{ __html: fields?.trailText }}
         />
       </div>
-      {thumbnail && (
+      {fields?.thumbnail ? (
         <Image
           className={styles.image}
-          src={thumbnail}
+          src={fields?.thumbnail}
           alt={webTitle}
           width={540}
           height={423}
         />
+      ) : (
+        <div className={bigStyles.placeholder}>
+          <Logo />
+        </div>
       )}
     </article>
   )

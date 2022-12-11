@@ -6,3 +6,14 @@
   font-size: 1.5rem;
   line-height: 1.9375rem;
 }
+
+.no-thumbnail-container {
+  background-color: var(--article-bg-placeholder);
+}
+
+.placeholder {
+  display: flex;
+  height: calc(100% - 42.46%);
+  align-items: center;
+  justify-content: center;
+}
