@@ -44,8 +44,25 @@ export async function getServerSideProps({ query }: { query: Query }) {
   const sport = (
     await api<ContentResponse>('search', {
       ...commonQuery,
+      /* from date doesn't return results */
       /* only section 'sport' returns less articles */
       section: 'sport|football',
+    })
+  ).response.results.map(remapFields)
+  const culture = (
+    await api<ContentResponse>('search', {
+      ...commonQuery,
+      /* only section 'sport' returns less articles */
+      ['from-date']: `${year}-${month}-${day}`,
+      section: 'culture',
+    })
+  ).response.results.map(remapFields)
+  const lifeandstyle = (
+    await api<ContentResponse>('search', {
+      ...commonQuery,
+      /* only section 'sport' returns less articles */
+      ['from-date']: `${year}-${month}-${day}`,
+      section: 'lifeandstyle',
     })
   ).response.results.map(remapFields)
 
@@ -54,6 +71,8 @@ export async function getServerSideProps({ query }: { query: Query }) {
       news,
       sections: {
         sport,
+        culture,
+        lifeandstyle,
       },
     },
   }
@@ -63,10 +82,15 @@ interface HomeProps {
   news: ArticleResult[]
   sections: {
     sport: ArticleResult[]
+    culture: ArticleResult[]
+    lifeandstyle: ArticleResult[]
   }
 }
 
-const Home: React.FC<HomeProps> = ({ news, sections: { sport } }) => (
+const Home: React.FC<HomeProps> = ({
+  news,
+  sections: { sport, lifeandstyle, culture },
+}) => (
   <>
     <ListHeader title="Top Stories" />
     <section className={styles.top}>
@@ -86,10 +110,22 @@ const Home: React.FC<HomeProps> = ({ news, sections: { sport } }) => (
       <Article {...news[7]} variation={ArticleVariation.BIG} />
     </section>
     <SectionTitle title="Sports" />
-    <section className={styles['sport-news']}>
+    <section className={styles['section-news']}>
       <Article {...sport[0]} variation={ArticleVariation.SMALL} />
       <Article {...sport[1]} variation={ArticleVariation.SMALL} />
       <Article {...sport[2]} variation={ArticleVariation.SMALL} />
+    </section>
+    <SectionTitle title="Life & Style" />
+    <section className={styles['section-news']}>
+      <Article {...lifeandstyle[0]} variation={ArticleVariation.SMALL} />
+      <Article {...lifeandstyle[1]} variation={ArticleVariation.SMALL} />
+      <Article {...lifeandstyle[2]} variation={ArticleVariation.SMALL} />
+    </section>
+    <SectionTitle title="Culture" />
+    <section className={styles['section-news']}>
+      <Article {...culture[0]} variation={ArticleVariation.SMALL} />
+      <Article {...culture[1]} variation={ArticleVariation.SMALL} />
+      <Article {...culture[2]} variation={ArticleVariation.SMALL} />
     </section>
   </>
 )

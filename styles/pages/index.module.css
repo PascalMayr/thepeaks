@@ -24,7 +24,7 @@
   margin-top: 1.875rem;
 }
 
-.sport-news {
+.section-news {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.875rem;
