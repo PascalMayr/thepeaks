@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import LinesEllipsis from 'react-lines-ellipsis'
 import { ArticleProps } from '.'
 import styles from '../../styles/components/article/index.module.css'
 import bigStyles from '../../styles/components/article/big.module.css'
 import classNames from 'classnames'
+import ResponsiveEllipsis from '../responsiveEllipsis'
 
 export enum ArticleVariation {
   SMALL,
@@ -15,7 +15,7 @@ const ArticleBig: React.FC<ArticleProps> = ({ fields, webTitle, top }) => {
   return (
     <article className={styles.container}>
       <div className={styles.news}>
-        <LinesEllipsis
+        <ResponsiveEllipsis
           text={webTitle}
           maxLine={2}
           ellipsis="..."

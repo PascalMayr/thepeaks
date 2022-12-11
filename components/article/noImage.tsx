@@ -1,14 +1,14 @@
 import styles from '../../styles/components/article/index.module.css'
 import noImageStyles from '../../styles/components/article/noImage.module.css'
-import LinesEllipsis from 'react-lines-ellipsis'
 import { ArticleProps } from '.'
 import classNames from 'classnames'
+import ResponsiveEllipsis from '../responsiveEllipsis'
 
 const Article: React.FC<ArticleProps> = ({ webTitle }) => {
   return (
     <article className={styles.container}>
       <div className={classNames(styles.news, noImageStyles.news)}>
-        <LinesEllipsis
+        <ResponsiveEllipsis
           text={webTitle}
           maxLine={4}
           ellipsis="..."
