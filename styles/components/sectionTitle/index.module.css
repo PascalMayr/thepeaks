@@ -1,0 +1,8 @@
+.title {
+  font-family: var(--font-family-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.125rem;
+  line-height: 2.4375rem;
+  margin-top: 3.125rem;
+}
