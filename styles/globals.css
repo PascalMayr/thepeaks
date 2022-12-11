@@ -48,7 +48,7 @@ body {
 html {
   /* stylelint-disable */
   /* set default font size for rem calculation */
-  font-size: 16px;
+  font-size: 1rem;
   /* stylelint-enable */
 }
 
@@ -80,4 +80,22 @@ a {
   /* fonts */
   --font-family-primary: georgia, sans-serif;
   --font-family-secondary: roboto, sans-serif;
+}
+
+@media (max-width: 62rem) {
+  :root {
+    --page-padding: 3.125rem;
+  }
+}
+
+@media (max-width: 51.5625rem) {
+  :root {
+    --page-padding: 1.875rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --page-padding: 1.25rem;
+  }
 }

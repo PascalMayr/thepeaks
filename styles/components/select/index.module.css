@@ -50,10 +50,6 @@
   letter-spacing: 0.0056rem;
 }
 
-.selected {
-  background-color: var(--select-border-color);
-}
-
 .arrow {
   position: absolute;
   top: 1.25rem;

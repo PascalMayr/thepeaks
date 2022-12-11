@@ -104,6 +104,16 @@ const Home: React.FC<HomeProps> = ({
         <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
       </div>
     </section>
+    <section className={styles['mobile-top']}>
+      <div className={styles['top-news-col']}>
+        <Article {...news[1]} variation={ArticleVariation.SMALL} top />
+        <Article {...news[2]} variation={ArticleVariation.NOIMAGE} />
+      </div>
+      <div className={styles['top-news-col']}>
+        <Article {...news[3]} variation={ArticleVariation.SMALL} top />
+        <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
+      </div>
+    </section>
     <section className={styles['top-news-second-row']}>
       <Article {...news[5]} variation={ArticleVariation.BIG} />
       <Article {...news[6]} variation={ArticleVariation.BIG} />
