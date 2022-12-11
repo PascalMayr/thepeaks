@@ -21,6 +21,7 @@
   right: 0;
   z-index: 1;
   background-color: var(--bg-tertiary-color);
+  user-select: none;
 }
 
 .open {

@@ -38,6 +38,7 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
+      e.preventDefault()
       /* mimic behavior from native select and open the select on space press */
       if (e.key === ' ') {
         handleFocus()
@@ -45,6 +46,10 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
     },
     [handleFocus]
   )
+
+  const handleArrowClick = useCallback(() => {
+    if (focused) handleUnfocus()
+  }, [focused, handleUnfocus])
 
   /* avoid rerendering when focusing */
   const Options = useMemo(
@@ -65,7 +70,10 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
       className={classNames(styles.container, focused && styles.open)}
     >
       {!focused ? Options[selected] : Options}
-      <Arrow className={classNames(styles.arrow, focused && styles.rotate)} />
+      <Arrow
+        onClick={handleArrowClick}
+        className={classNames(styles.arrow, focused && styles.rotate)}
+      />
     </div>
   )
 }
