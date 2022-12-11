@@ -26,8 +26,8 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
   const [body, setBody] = useState<string>(fields?.body || '')
   const [bodyImages, setBodyImages] = useState<string>('')
 
-  useEffect(() => {
-    const dom = domForHtml(fields?.body)
+  const setCleanBody = useCallback((bodystring: string) => {
+    const dom = domForHtml(bodystring)
     // extract images and show them on the right side
     const images = Array.from(
       dom?.querySelectorAll('figure.element-image') || []
@@ -37,7 +37,11 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
       ?.forEach((element: Element) => element.remove())
     setBodyImages(images.join(''))
     setBody(dom?.innerHTML || '')
-  }, [fields?.body])
+  }, [])
+
+  useEffect(() => {
+    setCleanBody(fields?.body)
+  }, [fields?.body, setCleanBody])
 
   const formatDate = useCallback((apiDate: string) => {
     const date = Intl.DateTimeFormat('en', {
@@ -60,6 +64,16 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
     )} ${date[5]}`
   }, [])
 
+  useEffect(() => {
+    addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+        setBody(fields?.body)
+        return
+      }
+      setCleanBody(fields?.body)
+    })
+  }, [fields?.body, setCleanBody])
+
   return (
     <div className={styles.container}>
       <BookmarkButton title="Add Bookmark" />
@@ -78,7 +92,10 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: body }}
           />
-          <div dangerouslySetInnerHTML={{ __html: bodyImages }} />
+          <div
+            className={styles['image-container']}
+            dangerouslySetInnerHTML={{ __html: bodyImages }}
+          />
         </div>
       </div>
     </div>

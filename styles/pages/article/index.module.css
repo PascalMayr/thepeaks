@@ -92,9 +92,17 @@
   }
 }
 
+.image-container {
+  display: block;
+}
+
 @media (max-width: 48rem) {
   .content-image-container {
     flex-direction: column;
+  }
+
+  .image-container {
+    display: none;
   }
 
   .headline,
