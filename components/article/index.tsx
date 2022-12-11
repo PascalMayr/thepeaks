@@ -27,10 +27,11 @@ export interface ArticleProps extends ArticleResult {
 }
 
 const Article: React.FC<ArticleProps> = (props) => {
-  const { webTitle, variation, sectionId } = props
+  const { webTitle, variation, pillarName } = props
+  console.log(pillarName)
   return (
     <Link
-      className={classNames(styles.link, sectionId)}
+      className={classNames(styles.link, styles[pillarName])}
       href={`article/${webTitle}`}
     >
       {variation === ArticleVariation.SMALL && <ArticleSmall {...props} />}

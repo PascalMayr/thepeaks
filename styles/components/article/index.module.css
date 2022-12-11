@@ -50,3 +50,23 @@
 .link {
   box-sizing: border-box;
 }
+
+/* stylelint-disable */
+.News {
+  border-bottom: 0.1875rem solid var(--article-news-color);
+}
+
+.Sport {
+  border-bottom: 0.1875rem solid var(--article-sports-color);
+}
+
+.Lifestyle {
+  border-bottom: 0.1875rem solid var(--article-lifestyle-color);
+}
+
+/* culture category */
+.Arts {
+  border-bottom: 0.1875rem solid var(--article-culture-color);
+}
+
+/* stylelint-enable */
