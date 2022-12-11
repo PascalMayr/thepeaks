@@ -11,11 +11,7 @@ export enum ArticleVariation {
   NOIMAGE,
 }
 
-const ArticleBig: React.FC<ArticleProps> = ({
-  fields: { thumbnail, trailText },
-  webTitle,
-  top,
-}) => {
+const ArticleBig: React.FC<ArticleProps> = ({ fields, webTitle, top }) => {
   return (
     <article className={styles.container}>
       <div className={styles.news}>

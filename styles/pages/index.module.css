@@ -14,7 +14,17 @@
   gap: 1.875rem 1.875rem;
 }
 
-.top-second-row {
+.top-news-second-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.875rem;
+  grid-template-areas: '. . .';
+  min-height: 21.875rem;
+  height: 21.875rem;
+  margin-top: 1.875rem;
+}
+
+.sport-news {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.875rem;

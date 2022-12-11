@@ -1,5 +1,17 @@
 .web-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.8125rem;
+  letter-spacing: 0.0044rem;
+}
+
+.top-web-title {
   font-size: 1.125rem;
   line-height: 1.6875rem;
   letter-spacing: 0.0039rem;
+}
+
+.not-top-news {
+  height: 38.62%;
 }
