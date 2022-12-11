@@ -28,7 +28,11 @@ const ArticleBig: React.FC<ArticleProps> = ({ fields, webTitle, top }) => {
           )}
           component="h2"
         />
-        <p className={styles['trail-text']}>{trailText}</p>
+        {/* some articles return HTML */}
+        <p
+          className={styles['trail-text']}
+          dangerouslySetInnerHTML={{ __html: fields?.trailText }}
+        />
       </div>
       {thumbnail && (
         <Image
