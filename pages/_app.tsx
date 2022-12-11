@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/pages/article/content.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Header from '../components/header'
@@ -44,9 +45,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => (
       <meta name="theme-color" content="#ffffff"></meta>
     </Head>
     <Header />
-    <div className={styles.page}>
+    <main className={styles.page}>
       <Component {...pageProps} />
-    </div>
+    </main>
     <Footer />
   </>
 )

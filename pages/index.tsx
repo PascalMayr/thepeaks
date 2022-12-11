@@ -29,10 +29,11 @@ export async function getServerSideProps({ query }: { query: Query }) {
   /* request theguardian API */
   const remapFields = ({
     webTitle,
+    id,
     sectionId,
     fields,
     pillarName,
-  }: Result) => ({ webTitle, sectionId, fields: fields || {}, pillarName })
+  }: Result) => ({ webTitle, id, sectionId, fields: fields || {}, pillarName })
   const news = (
     await api<ContentResponse>('search', {
       ...commonQuery,

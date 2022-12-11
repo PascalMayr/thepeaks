@@ -12,6 +12,7 @@ export enum ArticleVariation {
 }
 
 export interface ArticleResult {
+  id: string
   webTitle: string
   sectionId: string
   pillarName: string
@@ -27,12 +28,11 @@ export interface ArticleProps extends ArticleResult {
 }
 
 const Article: React.FC<ArticleProps> = (props) => {
-  const { webTitle, variation, pillarName } = props
-  console.log(pillarName)
+  const { id, variation, pillarName } = props
   return (
     <Link
       className={classNames(styles.link, styles[pillarName])}
-      href={`article/${webTitle}`}
+      href={`/article?id=${id}`}
     >
       {variation === ArticleVariation.SMALL && <ArticleSmall {...props} />}
       {variation === ArticleVariation.NOIMAGE && <ArticleNoImage {...props} />}
