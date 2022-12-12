@@ -1,10 +1,3 @@
-enum Pillar {
-  Arts,
-  Sport,
-  News,
-  Opinion,
-}
-
 export interface Result {
   id: string
   type: string
@@ -16,7 +9,7 @@ export interface Result {
   apiUrl: string
   isHosted: boolean
   pillarId: string
-  pillarName: Pillar
+  pillarName: string
 }
 
 export interface ContentResult extends Result {
@@ -43,6 +36,7 @@ export interface ContentResponse {
 export interface SearchResult extends Result {
   fields: {
     thumbnail?: string
+    trailText: string
   }
 }
 
