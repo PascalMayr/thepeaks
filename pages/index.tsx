@@ -29,12 +29,14 @@ export async function getServerSideProps({ query }: { query: Query }) {
   /* request theguardian API */
   const remapFields = ({
     webTitle,
+    webPublicationDate,
     id,
     sectionId,
     fields,
     pillarName,
   }: ContentResult) => ({
     webTitle,
+    webPublicationDate,
     id,
     sectionId,
     fields: fields || {},

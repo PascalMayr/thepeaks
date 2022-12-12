@@ -16,6 +16,7 @@ export interface ArticleResult {
   webTitle: string
   sectionId: string
   pillarName: string
+  webPublicationDate: string
   fields: {
     thumbnail?: string
     trailText: string
