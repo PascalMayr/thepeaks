@@ -85,6 +85,26 @@
   color: var(--text-primary-color);
 }
 
+.remove-bookmark {
+  width: 9.75rem;
+}
+
+.bookmark-hint {
+  width: 100%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  background-color: #388e3c;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.bookmark-hint-removed {
+  background-color: #d32f2f;
+}
+
 @media (max-width: 62rem) {
   .content,
   .headline {

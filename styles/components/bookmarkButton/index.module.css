@@ -21,3 +21,7 @@
   letter-spacing: 0.0188rem;
   text-transform: uppercase;
 }
+
+.disabled {
+  cursor: initial;
+}
