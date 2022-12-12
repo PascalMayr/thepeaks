@@ -14,8 +14,8 @@
   border: 0.5rem solid var(--bg-primary-color);
   border-radius: 50%;
   border-top: 0.5rem solid var(--bg-tertiary-color);
-  width: 5.125rem;
-  height: 5.125rem;
+  width: 4.4375rem;
+  height: 4.4375rem;
   animation: rotating 1s linear infinite;
 }
 
