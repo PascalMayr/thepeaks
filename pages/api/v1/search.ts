@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getSearchResults } from '../../search'
 
 /**
- * Returns new search results for the client side.
+ * Returns new search results for the client side to avoid exposing credentials
  *
  * @param {NextApiRequest} req The number to raise.
  * @param {NextApiResponse} res The number to raise.
