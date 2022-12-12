@@ -139,6 +139,11 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
           />
         ))}
       </div>
+      {articles.length === 0 && (
+        <h2 className={styles.noresult}>
+          No results found for: <b>{q}</b>
+        </h2>
+      )}
     </>
   )
 }

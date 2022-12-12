@@ -90,7 +90,8 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
       <div>
         <div className={styles.headline}>
           <h1 className={styles.title}>{webTitle}</h1>
-          {/* trailtext can be html returned from the API */}
+          {/* headline is the same as webTitle usnig trailText instead.
+          trailtext can be html returned from the API */}
           <p
             className={styles['trail-text']}
             dangerouslySetInnerHTML={{ __html: fields?.trailText }}
