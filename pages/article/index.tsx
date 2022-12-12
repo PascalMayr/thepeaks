@@ -27,9 +27,9 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
   const [body, setBody] = useState<string>(fields?.body || '')
   const [bodyImages, setBodyImages] = useState<string>('')
 
-  const setCleanBody = useCallback((bodystring: string) => {
+  /* extract images and show them on the right side on dekstop as shown in the design */
+  const setBodyWithoutImages = useCallback((bodystring: string) => {
     const dom = domForHtml(bodystring)
-    // extract images and show them on the right side
     const images = Array.from(
       dom?.querySelectorAll('figure.element-image') || []
     ).map((img: Element) => img.outerHTML)
@@ -40,9 +40,24 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
     setBody(dom?.innerHTML || '')
   }, [])
 
+  /* put images back to the right side on desktop */
   useEffect(() => {
-    setCleanBody(fields?.body)
-  }, [fields?.body, setCleanBody])
+    if (window.innerWidth > 818) {
+      setBodyWithoutImages(fields?.body)
+    }
+  }, [fields?.body, setBodyWithoutImages])
+  /* put images back into the body on mobile */
+  useEffect(() => {
+    const resizeCallback = () => {
+      if (window.innerWidth < 818) {
+        setBody(fields?.body)
+        return
+      }
+      setBodyWithoutImages(fields?.body)
+    }
+    addEventListener('resize', resizeCallback)
+    return () => removeEventListener('resize', resizeCallback)
+  }, [fields?.body, setBodyWithoutImages])
 
   const formatDate = useCallback((apiDate: string) => {
     const date = Intl.DateTimeFormat('en', {
@@ -64,16 +79,6 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
       '.'
     )} ${date[5]}`
   }, [])
-
-  useEffect(() => {
-    addEventListener('resize', () => {
-      if (window.innerWidth < 768) {
-        setBody(fields?.body)
-        return
-      }
-      setCleanBody(fields?.body)
-    })
-  }, [fields?.body, setCleanBody])
 
   return (
     <div className={styles.container}>
