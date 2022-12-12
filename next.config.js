@@ -11,7 +11,7 @@ const nextConfig = {
     return config
   },
   images: {
-    domains: ['media.guim.co.uk'],
+    domains: ['media.guim.co.uk', 'static.guim.co.uk'],
   },
 }
 
