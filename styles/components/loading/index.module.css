@@ -8,14 +8,20 @@
   }
 }
 
-.circle {
+.loader {
   color: var(--bg-primary-color);
+  transform-origin: center;
+  border: 0.5rem solid var(--bg-primary-color);
+  border-radius: 50%;
+  border-top: 0.5rem solid var(--bg-tertiary-color);
+  width: 5.125rem;
+  height: 5.125rem;
   animation: rotating 1s linear infinite;
 }
 
 .container {
   display: flex;
-  margin-top: 3.125rem;
+  margin-top: 14.875rem;
   justify-content: center;
   align-items: center;
 }
