@@ -9,7 +9,7 @@
 
 3.) Create a developer key at: https://open-platform.theguardian.com/access/
 
-4.) Create a ".env.local" file at root of the project and set the API credentials created like this:
+4.) Create a ".env.local" file at root of the project and set the following env variables:
 
 ```
 API_URL=https://content.guardianapis.com/
