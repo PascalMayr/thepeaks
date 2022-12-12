@@ -31,5 +31,6 @@
 
   .bookmark-container {
     max-width: unset;
+    min-width: unset;
   }
 }
