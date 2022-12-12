@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { LoadingContext } from '../../context/LoadingContext'
 import styles from '../../styles/components/listHeader/index.module.css'
 import BookmarkButton from '../bookmarkButton'
 import Select from '../select'
@@ -13,6 +15,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({
   title,
   hideBookmarkButton,
 }) => {
+  const { setLoading } = useContext(LoadingContext)
   const router = useRouter()
   const sortOptions: string[] = ['Newest first', 'Oldest first']
   const selectHandler = (selectedIndex: number) => {
@@ -23,6 +26,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({
       (oldOrderBy && newOrderBy !== oldOrderBy) ||
       (!oldOrderBy && selectedIndex > 0)
     ) {
+      setLoading(true)
       router.push({ query: { ...router.query, ['order-by']: newOrderBy } })
     }
   }

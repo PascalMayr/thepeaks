@@ -9,7 +9,9 @@ import ListHeader from '../components/listHeader'
 import { SearchResponse, SearchResult } from '../types'
 import api from '../utils/api'
 import styles from '../styles/pages/search.module.css'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { LoadingContext } from '../context/LoadingContext'
+import Loading from '../components/loading'
 
 interface Query extends ParsedUrlQuery {
   q: string
@@ -65,7 +67,9 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({ q, results, order }) => {
+  const { loading, setLoading } = useContext(LoadingContext)
   const [articles, setArticles] = useState<ArticleResult[]>([])
+  const [loadingMore, setLoadingMore] = useState<boolean>(false)
   /* sortin on client side since API isn't returning results with order-by query param */
   const handleArticleUpdate = useCallback(
     (articles: ArticleResult[]) => {
@@ -94,14 +98,15 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
   useEffect(() => {
     if (results) {
       handleArticleUpdate(results)
+      setLoading(false)
     }
-  }, [results, handleArticleUpdate])
+  }, [results, setLoading, handleArticleUpdate])
 
   /* load more articles */
   const loadMore = useCallback(async () => {
     if (
       Number(window.innerHeight) + Number(window.scrollY) >=
-      document.body.offsetHeight - 250
+      document.body.offsetHeight - 300
     ) {
       removeEventListener('scroll', loadMore)
       const nextPage = articles.length / 15 + 1
@@ -109,12 +114,18 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
         q,
         page: String(nextPage),
       }).toString()
-      const newResults = await (
-        await fetch(
-          `${process.env.NEXT_PUBLIC_CLIENT_EXPOSED_API}/search?${searchQuery}`
-        )
-      ).json()
-      handleArticleUpdate([...articles, ...newResults])
+      try {
+        setLoadingMore(true)
+        const newResults = await (
+          await fetch(
+            `${process.env.NEXT_PUBLIC_CLIENT_EXPOSED_API}/search?${searchQuery}`
+          )
+        ).json()
+        setLoadingMore(false)
+        handleArticleUpdate([...articles, ...newResults])
+      } catch (_e: unknown) {
+        console.error('loading more articles failed')
+      }
       await new Promise((resolve) => setTimeout(resolve, 3000))
     }
   }, [articles, q, handleArticleUpdate])
@@ -124,25 +135,34 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
     return () => removeEventListener('scroll', loadMore)
   }, [loadMore])
 
+  const Articles = useMemo(() => {
+    return articles.map((article) => (
+      <Article
+        key={article.id}
+        {...article}
+        variation={ArticleVariation.SMALL}
+      />
+    ))
+  }, [articles])
+
   return (
     <>
       <Head>
         <title>The Peaks - Search</title>
       </Head>
-      <ListHeader title="Search results" />
-      <div className={styles.results}>
-        {articles.map((article) => (
-          <Article
-            key={article.id}
-            {...article}
-            variation={ArticleVariation.SMALL}
-          />
-        ))}
-      </div>
-      {articles.length === 0 && (
-        <h2 className={styles.noresult}>
-          No results found for: <b>{q}</b>
-        </h2>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <ListHeader title="Search results" />
+          <div className={styles.results}>{Articles}</div>
+          {loadingMore && <Loading />}
+          {articles.length === 0 && !loading && (
+            <h2 className={styles.noresult}>
+              No results found for: <b>{q}</b>
+            </h2>
+          )}
+        </>
       )}
     </>
   )

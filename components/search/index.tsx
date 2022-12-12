@@ -1,11 +1,13 @@
 import styles from '../../styles/components/search/index.module.css'
 import SearchIcon from '../../assets/search.svg'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useCallback, useContext, useState } from 'react'
 import classNames from 'classnames'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
+import { LoadingContext } from '../../context/LoadingContext'
 
 const Search: React.FC = () => {
+  const { setLoading } = useContext(LoadingContext)
   const [search, setSearch] = useState<string>('')
   const [focused, setFocused] = useState<boolean>(false)
   const handleFocus = useCallback(() => {
@@ -22,15 +24,17 @@ const Search: React.FC = () => {
         query: { ...router.query, q: searchValue },
         pathname: '/search',
       })
+      setSearch('')
     }, 700),
     [router]
   )
   const handleSearch = useCallback(
     (value: string) => {
       setSearch(value)
+      setLoading(true)
       debouncedSave(value)
     },
-    [debouncedSave]
+    [debouncedSave, setLoading]
   )
 
   const onChange = useCallback(

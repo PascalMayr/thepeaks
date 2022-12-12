@@ -64,10 +64,12 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
     [options, handleSelect]
   )
 
-  // set default again if page reloads
+  // set selecterd when page reloads
   const router = useRouter()
   useEffect(() => {
-    if (!router.query['order-by']) setSelected(0)
+    if (router.query['order-by'] === 'newest' || !router.query['order-by'])
+      setSelected(0)
+    if (router.query['order-by'] === 'oldest') setSelected(1)
   }, [router])
 
   return (
@@ -78,7 +80,11 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
       onKeyDown={handleKeyDown}
       className={classNames(styles.container, focused && styles.open)}
     >
-      {!focused ? Options[selected] : Options}
+      {!focused ? (
+        <div className={styles.item}>{options[selected]}</div>
+      ) : (
+        Options
+      )}
       <Arrow
         onClick={handleArrowClick}
         className={classNames(styles.arrow, focused && styles.rotate)}

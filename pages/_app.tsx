@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import styles from '../styles/pages/app.module.css'
+import { LoadingContextProvider } from '../context/LoadingContext'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => (
   <>
@@ -44,11 +45,13 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => (
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
     </Head>
-    <Header />
-    <main className={styles.page}>
-      <Component {...pageProps} />
-    </main>
-    <Footer />
+    <LoadingContextProvider>
+      <Header />
+      <main className={styles.page}>
+        <Component {...pageProps} />
+      </main>
+      <Footer />
+    </LoadingContextProvider>
   </>
 )
 

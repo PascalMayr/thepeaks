@@ -23,6 +23,6 @@ export default async function handler(
     }
   } catch (_e) {
     res.status(500)
-    console.log('An error happened while searching')
+    console.error('An error happened while searching')
   }
 }

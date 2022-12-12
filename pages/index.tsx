@@ -5,6 +5,10 @@ import { ParsedUrlQuery } from 'querystring'
 import Article, { ArticleResult, ArticleVariation } from '../components/article'
 import styles from '../styles/pages/index.module.css'
 import SectionTitle from '../components/sectionTitle'
+import { useContext, useEffect } from 'react'
+import { LoadingContext } from '../context/LoadingContext'
+import Loading from '../components/loading'
+import { useRouter } from 'next/router'
 
 /* query params */
 interface Query extends ParsedUrlQuery {
@@ -99,54 +103,67 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({
   news,
   sections: { sport, lifeandstyle, culture },
-}) => (
-  <>
-    <ListHeader title="Top Stories" />
-    <section className={styles.top}>
-      <Article {...news[0]} variation={ArticleVariation.BIG} top />
-      <div className={styles['top-news-col']}>
-        <Article {...news[1]} variation={ArticleVariation.SMALL} top />
-        <Article {...news[2]} variation={ArticleVariation.NOIMAGE} />
-      </div>
-      <div className={styles['top-news-col']}>
-        <Article {...news[3]} variation={ArticleVariation.SMALL} top />
-        <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
-      </div>
-    </section>
-    <section className={styles['mobile-top']}>
-      <div className={styles['top-news-col']}>
-        <Article {...news[1]} variation={ArticleVariation.SMALL} top />
-        <Article {...news[2]} variation={ArticleVariation.NOIMAGE} />
-      </div>
-      <div className={styles['top-news-col']}>
-        <Article {...news[3]} variation={ArticleVariation.SMALL} top />
-        <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
-      </div>
-    </section>
-    <section className={styles['top-news-second-row']}>
-      <Article {...news[5]} variation={ArticleVariation.BIG} />
-      <Article {...news[6]} variation={ArticleVariation.BIG} />
-      <Article {...news[7]} variation={ArticleVariation.BIG} />
-    </section>
-    <SectionTitle title="Sports" />
-    <section className={styles['section-news']}>
-      <Article {...sport[0]} variation={ArticleVariation.SMALL} />
-      <Article {...sport[1]} variation={ArticleVariation.SMALL} />
-      <Article {...sport[2]} variation={ArticleVariation.SMALL} />
-    </section>
-    <SectionTitle title="Life & Style" />
-    <section className={styles['section-news']}>
-      <Article {...lifeandstyle[0]} variation={ArticleVariation.SMALL} />
-      <Article {...lifeandstyle[1]} variation={ArticleVariation.SMALL} />
-      <Article {...lifeandstyle[2]} variation={ArticleVariation.SMALL} />
-    </section>
-    <SectionTitle title="Culture" />
-    <section className={styles['section-news']}>
-      <Article {...culture[0]} variation={ArticleVariation.SMALL} />
-      <Article {...culture[1]} variation={ArticleVariation.SMALL} />
-      <Article {...culture[2]} variation={ArticleVariation.SMALL} />
-    </section>
-  </>
-)
+}) => {
+  const { loading, setLoading } = useContext(LoadingContext)
+  const router = useRouter()
+  useEffect(() => {
+    setLoading(false)
+  }, [router, setLoading])
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <ListHeader title="Top Stories" />
+          <section className={styles.top}>
+            <Article {...news[0]} variation={ArticleVariation.BIG} top />
+            <div className={styles['top-news-col']}>
+              <Article {...news[1]} variation={ArticleVariation.SMALL} top />
+              <Article {...news[2]} variation={ArticleVariation.NOIMAGE} />
+            </div>
+            <div className={styles['top-news-col']}>
+              <Article {...news[3]} variation={ArticleVariation.SMALL} top />
+              <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
+            </div>
+          </section>
+          <section className={styles['mobile-top']}>
+            <div className={styles['top-news-col']}>
+              <Article {...news[1]} variation={ArticleVariation.SMALL} top />
+              <Article {...news[2]} variation={ArticleVariation.NOIMAGE} />
+            </div>
+            <div className={styles['top-news-col']}>
+              <Article {...news[3]} variation={ArticleVariation.SMALL} top />
+              <Article {...news[4]} variation={ArticleVariation.NOIMAGE} />
+            </div>
+          </section>
+          <section className={styles['top-news-second-row']}>
+            <Article {...news[5]} variation={ArticleVariation.BIG} />
+            <Article {...news[6]} variation={ArticleVariation.BIG} />
+            <Article {...news[7]} variation={ArticleVariation.BIG} />
+          </section>
+          <SectionTitle title="Sports" />
+          <section className={styles['section-news']}>
+            <Article {...sport[0]} variation={ArticleVariation.SMALL} />
+            <Article {...sport[1]} variation={ArticleVariation.SMALL} />
+            <Article {...sport[2]} variation={ArticleVariation.SMALL} />
+          </section>
+          <SectionTitle title="Life & Style" />
+          <section className={styles['section-news']}>
+            <Article {...lifeandstyle[0]} variation={ArticleVariation.SMALL} />
+            <Article {...lifeandstyle[1]} variation={ArticleVariation.SMALL} />
+            <Article {...lifeandstyle[2]} variation={ArticleVariation.SMALL} />
+          </section>
+          <SectionTitle title="Culture" />
+          <section className={styles['section-news']}>
+            <Article {...culture[0]} variation={ArticleVariation.SMALL} />
+            <Article {...culture[1]} variation={ArticleVariation.SMALL} />
+            <Article {...culture[2]} variation={ArticleVariation.SMALL} />
+          </section>
+        </>
+      )}
+    </>
+  )
+}
 
 export default Home
