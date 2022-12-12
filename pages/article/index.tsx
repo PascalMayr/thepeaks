@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
-import BookmarkButton from '../../components/bookmarkButton'
+import BookmarkButton, { BookmarkIcon } from '../../components/bookmarkButton'
 import styles from '../../styles/pages/article/index.module.css'
 import { ArticleContent, ArticleContentResponse } from '../../types'
 import api from '../../utils/api'
@@ -172,6 +172,7 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
           )}
           title={added ? 'Bookmark added' : 'Bookmark removed'}
           disabled
+          icon={!added ? BookmarkIcon.empty : BookmarkIcon.full}
         />
       )}
     </>

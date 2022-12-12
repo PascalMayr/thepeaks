@@ -1,7 +1,13 @@
 import styles from '../../styles/components/bookmarkButton/index.module.css'
 import BookMarkIcon from '../../assets/bookmark.svg'
+import BookMarkEmptyIcon from '../../assets/bookmark_empty.svg'
 import { CSSProperties, MouseEventHandler } from 'react'
 import classNames from 'classnames'
+
+export enum BookmarkIcon {
+  empty,
+  full,
+}
 
 interface BookmarkButtonProps {
   title: string
@@ -9,6 +15,7 @@ interface BookmarkButtonProps {
   className?: string
   disabled?: boolean
   style?: CSSProperties
+  icon?: BookmarkIcon
 }
 
 const BookmarkButton: React.FC<BookmarkButtonProps> = ({
@@ -16,6 +23,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({
   onClick,
   className,
   disabled,
+  icon = BookmarkIcon.full,
   style = {},
 }) => {
   return (
@@ -25,14 +33,24 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({
           style={style}
           className={classNames(styles.bookmark, className, styles.disabled)}
         >
-          <BookMarkIcon /> {title}
+          {icon === BookmarkIcon.full ? (
+            <BookMarkIcon />
+          ) : (
+            <BookMarkEmptyIcon />
+          )}{' '}
+          {title}
         </div>
       ) : (
         <div
           onClick={onClick}
           className={classNames(styles.bookmark, className)}
         >
-          <BookMarkIcon /> {title}
+          {icon === BookmarkIcon.full ? (
+            <BookMarkIcon />
+          ) : (
+            <BookMarkEmptyIcon />
+          )}{' '}
+          {title}
         </div>
       )}
     </>
