@@ -12,17 +12,19 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    if (req.method === 'GET') {
-      const results = await getSearchResults(
-        String(req.query.page) || '1',
-        req.query.q
-      )
-      res.status(200).json(results)
-    } else {
-      res.status(405)
+    switch (req.method) {
+      case 'GET':
+        const results = await getSearchResults(
+          String(req.query.page) || '1',
+          req.query.q
+        )
+        res.status(200).json(results)
+        break
+      default:
+        res.status(405).end()
     }
-  } catch (_e) {
+  } catch (e) {
     res.status(500)
-    console.error('An error happened while searching')
+    console.error('An error happened while searching', e)
   }
 }
