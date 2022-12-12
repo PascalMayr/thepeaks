@@ -1,3 +1,8 @@
+/**
+ * Returns a DOM object.
+ *
+ * @param {string | undefined} html The html string to parse.
+ */
 const domForHtml = (html: string | undefined): HTMLElement | undefined => {
   if (
     typeof DOMParser !== 'undefined' &&

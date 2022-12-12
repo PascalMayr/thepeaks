@@ -1,5 +1,12 @@
 const { API_URL, API_KEY } = process.env
 
+/**
+ * Returns a promise which resolves to the API result.
+ *
+ * @param {string} path The https://open-platform.theguardian.com API path.
+ * @param {object} query Query params.
+ * @param {RequestInit} init fetch() options.
+ */
 const api = async <T>(
   path: string,
   params = {},
