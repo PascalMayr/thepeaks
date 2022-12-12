@@ -7,12 +7,14 @@
   height: unset;
 }
 
-.block-time {
-  display: none;
-}
-
 .block-elements li {
   list-style-type: none;
+}
+
+.block-time,
+.block-time > time {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .block-elements *,
@@ -51,4 +53,40 @@ figure.element-image {
   letter-spacing: 0.019rem;
   opacity: 0.5;
   color: var(--text-primary-color);
+}
+
+.element-table table {
+  width: 100%;
+  border: 0.0625rem solid;
+  padding: 0.9375rem;
+  border-radius: 0.3125rem;
+}
+
+figure.element-table th {
+  font-weight: bold;
+  text-align: left;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+}
+
+figure.element-table th abbr {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.element-tweet {
+  border: 0.0625rem solid;
+  padding: 0.9375rem;
+  border-radius: 0.9375rem;
+  margin-bottom: 0.9375rem;
+}
+
+.element-tweet a {
+  color: var(--bg-primary-color);
+}
+
+.twitter-tweet > p,
+.twitter-tweet > p > a {
+  font-size: 1.125rem;
 }
