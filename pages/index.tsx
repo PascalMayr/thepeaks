@@ -1,5 +1,5 @@
 import ListHeader from '../components/listHeader/index'
-import { ContentResponse, Result } from '../types'
+import { ContentResponse, ContentResult } from '../types'
 import api from '../utils/api'
 import { ParsedUrlQuery } from 'querystring'
 import Article, { ArticleResult, ArticleVariation } from '../components/article'
@@ -33,7 +33,13 @@ export async function getServerSideProps({ query }: { query: Query }) {
     sectionId,
     fields,
     pillarName,
-  }: Result) => ({ webTitle, id, sectionId, fields: fields || {}, pillarName })
+  }: ContentResult) => ({
+    webTitle,
+    id,
+    sectionId,
+    fields: fields || {},
+    pillarName,
+  })
   const news = (
     await api<ContentResponse>('search', {
       ...commonQuery,
