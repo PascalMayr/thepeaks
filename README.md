@@ -4,8 +4,8 @@
 
 1.) Clone this repository
 
-2.) Install all necessary dependencies:
-`yarn install`
+2.) go into the project folder and install all necessary dependencies:
+`cd thepeaks && yarn install`
 
 3.) Create a developer key at: https://open-platform.theguardian.com/access/
 
