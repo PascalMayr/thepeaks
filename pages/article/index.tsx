@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import BookmarkButton from '../../components/bookmarkButton'
@@ -76,6 +77,9 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>{webTitle}</title>
+      </Head>
       <BookmarkButton title="Add Bookmark" />
       <p className={styles.date}>{formatDate(webPublicationDate)}</p>
       <div>
