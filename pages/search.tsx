@@ -8,6 +8,7 @@ import styles from '../styles/pages/search.module.css'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { LoadingContext } from '../context/LoadingContext'
 import Loading from '../components/loading'
+import clientApi from '../utils/clientApi'
 import remapApiFields from '../utils/remapApifields'
 
 interface Query extends ParsedUrlQuery {
@@ -98,11 +99,9 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
       }).toString()
       try {
         setLoadingMore(true)
-        const newResults = await (
-          await fetch(
-            `${process.env.NEXT_PUBLIC_CLIENT_EXPOSED_API}/search?${searchQuery}`
-          )
-        ).json()
+        const newResults = await clientApi<ArticleResult[]>(
+          `search?${searchQuery}`
+        )
         setLoadingMore(false)
         handleArticleUpdate([...articles, ...newResults])
       } catch (_e: unknown) {
