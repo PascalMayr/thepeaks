@@ -32,38 +32,42 @@ export async function getServerSideProps({ query }: { query: Query }) {
     ['show-fields']: 'thumbnail,trailText',
   }
   /* request theguardian API */
-  const news = (
-    await api<ContentResponse>('search', {
-      ...commonQuery,
-      /* only section 'news' isn't returning articles */
-      ['from-date']: `${year}-${month}-${day}`,
-      section: 'world|uk-news|australia-news|uk-news|us-news|news',
-    })
-  ).response.results.map(remapApiFields<ArticleResult>)
-  const sport = (
-    await api<ContentResponse>('search', {
-      ...commonQuery,
-      /* from date doesn't return results */
-      /* only section 'sport' returns less articles */
-      section: 'sport|football',
-    })
-  ).response.results.map(remapApiFields<ArticleResult>)
-  const culture = (
-    await api<ContentResponse>('search', {
-      ...commonQuery,
-      /* only section 'sport' returns less articles */
-      ['from-date']: `${year}-${month}-${day}`,
-      section: 'culture',
-    })
-  ).response.results.map(remapApiFields<ArticleResult>)
-  const lifeandstyle = (
-    await api<ContentResponse>('search', {
-      ...commonQuery,
-      /* only section 'sport' returns less articles */
-      ['from-date']: `${year}-${month}-${day}`,
-      section: 'lifeandstyle',
-    })
-  ).response.results.map(remapApiFields<ArticleResult>)
+  const news =
+    (
+      await api<ContentResponse>('search', {
+        ...commonQuery,
+        /* only section 'news' isn't returning articles */
+        ['from-date']: `${year}-${month}-${day}`,
+        section: 'world|uk-news|australia-news|uk-news|us-news|news',
+      })
+    )?.response.results.map(remapApiFields<ArticleResult>) || null
+  const sport =
+    (
+      await api<ContentResponse>('search', {
+        ...commonQuery,
+        /* from date doesn't return results */
+        /* only section 'sport' returns less articles */
+        section: 'sport|football',
+      })
+    )?.response.results.map(remapApiFields<ArticleResult>) || null
+  const culture =
+    (
+      await api<ContentResponse>('search', {
+        ...commonQuery,
+        /* only section 'sport' returns less articles */
+        ['from-date']: `${year}-${month}-${day}`,
+        section: 'culture',
+      })
+    )?.response.results.map(remapApiFields<ArticleResult>) || null
+  const lifeandstyle =
+    (
+      await api<ContentResponse>('search', {
+        ...commonQuery,
+        /* only section 'sport' returns less articles */
+        ['from-date']: `${year}-${month}-${day}`,
+        section: 'lifeandstyle',
+      })
+    )?.response.results.map(remapApiFields<ArticleResult>) || null
 
   return {
     props: {
@@ -97,7 +101,7 @@ const Home: React.FC<HomeProps> = ({
   }, [router, setLoading])
   return (
     <>
-      {loading ? (
+      {loading || (!news && !sport && !lifeandstyle && !culture) ? (
         <Loading />
       ) : (
         <>

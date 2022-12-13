@@ -11,13 +11,18 @@ const api = async <T>(
   path: string,
   params = {},
   init: RequestInit = {}
-): Promise<T> => {
-  const url = new URL(`${API_URL}${path}`)
-  url.search = new URLSearchParams({
-    ...params,
-    'api-key': API_KEY || '',
-  }).toString()
-  return await (await fetch(url, init)).json()
+): Promise<T | null> => {
+  try {
+    const url = new URL(`${API_URL}${path}`)
+    url.search = new URLSearchParams({
+      ...params,
+      'api-key': API_KEY || '',
+    }).toString()
+    return await (await fetch(url, init)).json()
+  } catch (error) {
+    return null
+    console.error('Fetch failed')
+  }
 }
 
 export default api

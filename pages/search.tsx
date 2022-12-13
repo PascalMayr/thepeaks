@@ -29,7 +29,7 @@ export const getSearchResults = async (
       page: Number(page) || 1,
       ['page-size']: 15,
     })
-  ).response?.results?.map(remapApiFields<ArticleResult>)
+  )?.response.results.map(remapApiFields<ArticleResult>)
 }
 
 export async function getServerSideProps({ query }: { query: Query }) {

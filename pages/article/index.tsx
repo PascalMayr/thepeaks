@@ -20,7 +20,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
     })
   )?.response.content
   return {
-    props: content,
+    props: content || {},
   }
 }
 

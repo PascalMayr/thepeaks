@@ -26,7 +26,9 @@ export default async function handler(
         res
           .status(200)
           .json(
-            results.map((result) => result.response.content).map(remapApiFields)
+            results
+              ?.map((result) => result.response.content)
+              .map(remapApiFields)
           )
       default:
         res.status(405)

@@ -37,3 +37,11 @@ next-env.d.ts
 
 #vscode config
 /.vscode/
+
+# next-pwa
+.swc/
+**/public/workbox-*.js
+**/public/workbox-*.map
+**/public/sw.js
+**/public/sw.js.map
+**/public/fallback-*.js
