@@ -1,5 +1,5 @@
 import ListHeader from '../components/listHeader/index'
-import { ContentResponse, ContentResult } from '../types'
+import { ArticleResult, ContentResponse } from '../types'
 import api from '../utils/api'
 import { ParsedUrlQuery } from 'querystring'
 import Article, { ArticleResult, ArticleVariation } from '../components/article'

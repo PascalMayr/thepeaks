@@ -4,23 +4,12 @@ import ArticleNoImage from './noImage'
 import Link from 'next/link'
 import styles from '../../styles/components/article/index.module.css'
 import classNames from 'classnames'
+import { ArticleResult } from '../../types'
 
 export enum ArticleVariation {
   SMALL,
   BIG,
   NOIMAGE,
-}
-
-export interface ArticleResult {
-  id: string
-  webTitle: string
-  sectionId: string
-  pillarName: string
-  webPublicationDate: string
-  fields: {
-    thumbnail?: string
-    trailText: string
-  }
 }
 
 export interface ArticleProps extends ArticleResult {

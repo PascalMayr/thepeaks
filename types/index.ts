@@ -70,3 +70,15 @@ export interface ArticleContentResponse {
     content: ArticleContent
   }
 }
+
+export interface ArticleResult {
+  id: string
+  webTitle: string
+  sectionId: string
+  pillarName: string
+  webPublicationDate: string
+  fields: {
+    thumbnail?: string
+    trailText: string
+  }
+}

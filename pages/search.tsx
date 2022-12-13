@@ -1,12 +1,8 @@
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
-import Article, {
-  ArticleProps,
-  ArticleResult,
-  ArticleVariation,
-} from '../components/article'
+import Article, { ArticleProps, ArticleVariation } from '../components/article'
 import ListHeader from '../components/listHeader'
-import { SearchResponse, SearchResult } from '../types'
+import { ArticleResult, SearchResponse } from '../types'
 import api from '../utils/api'
 import styles from '../styles/pages/search.module.css'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
