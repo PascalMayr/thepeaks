@@ -5,20 +5,6 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   register: true,
-  runtimeCaching: [
-    {
-      urlPattern: new RegExp('/api/v1/search'),
-      handler: 'StaleWhileRevalidate',
-      cacheName: 'loadMoreCache',
-    },
-    {
-      urlPattern: new RegExp('/api/v1/bookmarks'),
-      handler: 'StaleWhileRevalidate',
-      method: 'POST',
-      cacheName: 'bookmarksCache',
-    },
-    ...defaultRuntimeCaching,
-  ],
 })
 
 /** @type {import('next').NextConfig} */
