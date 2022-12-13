@@ -116,6 +116,7 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
     return () => removeEventListener('scroll', loadMore)
   }, [loadMore])
 
+  /* avoid rerendering if loadingMore state changes */
   const Articles = useMemo(() => {
     return articles.map((article) => (
       <Article
