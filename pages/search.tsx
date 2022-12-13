@@ -21,7 +21,7 @@ interface Query extends ParsedUrlQuery {
 export const getSearchResults = async (
   page: string,
   q: string | string[] | undefined
-): Promise<ArticleResult[]> => {
+): Promise<ArticleResult[] | undefined> => {
   return (
     await api<SearchResponse>('search', {
       q,
@@ -81,7 +81,9 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
         )
         setLoadingMore(false)
         window.scrollTo(0, window.pageYOffset - 300)
-        setArticles(sortArticles([...articles, ...newResults], order) || [])
+        setArticles(
+          sortArticles([...articles, ...(newResults || [])], order) || []
+        )
       } catch (_e: unknown) {
         console.error('loading more articles failed')
       }
