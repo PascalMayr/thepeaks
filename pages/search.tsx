@@ -10,6 +10,7 @@ import { LoadingContext } from '../context/LoadingContext'
 import Loading from '../components/loading'
 import clientApi from '../utils/clientApi'
 import remapApiFields from '../utils/remapApifields'
+import sortArticles from '../utils/sortArticles'
 
 interface Query extends ParsedUrlQuery {
   q: string
@@ -53,37 +54,13 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
   const { loading, setLoading } = useContext(LoadingContext)
   const [articles, setArticles] = useState<ArticleResult[]>([])
   const [loadingMore, setLoadingMore] = useState<boolean>(false)
-  /* sortin on client side since API isn't returning results with order-by query param */
-  const handleArticleUpdate = useCallback(
-    (articles: ArticleResult[]) => {
-      if (order === 'newest') {
-        setArticles(
-          articles.sort(
-            (resultA, resultB) =>
-              new Date(resultB.webPublicationDate).getTime() -
-              new Date(resultA.webPublicationDate).getTime()
-          )
-        )
-      }
-      if (order === 'oldest') {
-        setArticles(
-          articles.sort(
-            (resultA, resultB) =>
-              new Date(resultA.webPublicationDate).getTime() -
-              new Date(resultB.webPublicationDate).getTime()
-          )
-        )
-      }
-    },
-    [order]
-  )
 
   useEffect(() => {
     if (results) {
-      handleArticleUpdate(results)
+      setArticles(sortArticles(results, order) || [])
       setLoading(false)
     }
-  }, [results, setLoading, handleArticleUpdate])
+  }, [results, setLoading, order])
 
   /* load more articles */
   const loadMore = useCallback(async () => {
@@ -103,13 +80,14 @@ const Search: React.FC<SearchProps> = ({ q, results, order }) => {
           `search?${searchQuery}`
         )
         setLoadingMore(false)
-        handleArticleUpdate([...articles, ...newResults])
+        window.scrollTo(0, window.pageYOffset - 300)
+        setArticles(sortArticles([...articles, ...newResults], order) || [])
       } catch (_e: unknown) {
         console.error('loading more articles failed')
       }
       await new Promise((resolve) => setTimeout(resolve, 3000))
     }
-  }, [articles, q, handleArticleUpdate])
+  }, [articles, q, order, setArticles])
 
   useEffect(() => {
     addEventListener('scroll', loadMore)
