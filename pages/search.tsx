@@ -8,6 +8,7 @@ import styles from '../styles/pages/search.module.css'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { LoadingContext } from '../context/LoadingContext'
 import Loading from '../components/loading'
+import remapApiFields from '../utils/remapApifields'
 
 interface Query extends ParsedUrlQuery {
   q: string
@@ -19,21 +20,6 @@ export const getSearchResults = async (
   page: string,
   q: string | string[] | undefined
 ): Promise<ArticleResult[]> => {
-  const remapFields = ({
-    webTitle,
-    id,
-    webPublicationDate,
-    sectionId,
-    fields,
-    pillarName,
-  }: SearchResult): ArticleResult => ({
-    webTitle,
-    id,
-    webPublicationDate,
-    sectionId,
-    fields: fields || {},
-    pillarName: pillarName || '',
-  })
   return (
     await api<SearchResponse>('search', {
       q,
@@ -41,7 +27,7 @@ export const getSearchResults = async (
       page: Number(page) || 1,
       ['page-size']: 15,
     })
-  ).response?.results?.map(remapFields)
+  ).response?.results?.map(remapApiFields<ArticleResult>)
 }
 
 export async function getServerSideProps({ query }: { query: Query }) {

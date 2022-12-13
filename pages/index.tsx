@@ -9,6 +9,7 @@ import { useContext, useEffect } from 'react'
 import { LoadingContext } from '../context/LoadingContext'
 import Loading from '../components/loading'
 import { useRouter } from 'next/router'
+import remapApiFields from '../utils/remapApifields'
 
 /* query params */
 interface Query extends ParsedUrlQuery {
@@ -31,21 +32,6 @@ export async function getServerSideProps({ query }: { query: Query }) {
     ['show-fields']: 'thumbnail,trailText',
   }
   /* request theguardian API */
-  const remapFields = ({
-    webTitle,
-    webPublicationDate,
-    id,
-    sectionId,
-    fields,
-    pillarName,
-  }: ContentResult) => ({
-    webTitle,
-    webPublicationDate,
-    id,
-    sectionId,
-    fields: fields || {},
-    pillarName,
-  })
   const news = (
     await api<ContentResponse>('search', {
       ...commonQuery,
@@ -53,7 +39,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
       ['from-date']: `${year}-${month}-${day}`,
       section: 'world|uk-news|australia-news|uk-news|us-news|news',
     })
-  ).response.results.map(remapFields)
+  ).response.results.map(remapApiFields<ArticleResult>)
   const sport = (
     await api<ContentResponse>('search', {
       ...commonQuery,
@@ -61,7 +47,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
       /* only section 'sport' returns less articles */
       section: 'sport|football',
     })
-  ).response.results.map(remapFields)
+  ).response.results.map(remapApiFields<ArticleResult>)
   const culture = (
     await api<ContentResponse>('search', {
       ...commonQuery,
@@ -69,7 +55,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
       ['from-date']: `${year}-${month}-${day}`,
       section: 'culture',
     })
-  ).response.results.map(remapFields)
+  ).response.results.map(remapApiFields<ArticleResult>)
   const lifeandstyle = (
     await api<ContentResponse>('search', {
       ...commonQuery,
@@ -77,7 +63,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
       ['from-date']: `${year}-${month}-${day}`,
       section: 'lifeandstyle',
     })
-  ).response.results.map(remapFields)
+  ).response.results.map(remapApiFields<ArticleResult>)
 
   return {
     props: {
