@@ -24,6 +24,12 @@
   user-select: none;
 }
 
+@media (max-width: 48rem) {
+  .container {
+    width: 14.9375rem;
+  }
+}
+
 .open {
   transition: all 0.25s ease-in-out;
   height: 5.625rem;
