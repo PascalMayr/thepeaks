@@ -7,6 +7,7 @@ import styles from '../../styles/pages/article/index.module.css'
 import { ArticleContent, ArticleContentResponse } from '../../types'
 import api from '../../utils/api'
 import domForHtml from '../../utils/domForHtml'
+import getBookmarks from '../../utils/getBookmarks'
 
 interface Query extends ParsedUrlQuery {
   id: string
@@ -85,19 +86,15 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
   const [showHint, setShowHint] = useState(false)
 
   const addBookmark = useCallback(async () => {
-    localStorage.setItem('bookmarks', JSON.stringify([id]))
+    const bookmarks = getBookmarks()
+    localStorage.setItem('bookmarks', JSON.stringify([...bookmarks, id]))
     setAdded(true)
     setShowHint(true)
     const hinttimeout = setTimeout(() => {
       clearTimeout(hinttimeout)
       setShowHint(false)
-    }, 3000)
+    }, 2000)
   }, [id])
-
-  const getBookmarks = useCallback(
-    (): string[] => JSON.parse(localStorage.getItem('bookmarks') || '[]'),
-    []
-  )
 
   const removeBookmark = useCallback(async () => {
     const bookmarks = getBookmarks()
@@ -110,8 +107,8 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
     const hinttimeout = setTimeout(() => {
       clearTimeout(hinttimeout)
       setShowHint(false)
-    }, 3000)
-  }, [id, getBookmarks])
+    }, 2000)
+  }, [id])
 
   const handleBookmarkClick = useCallback(() => {
     if (!added) addBookmark()
@@ -123,7 +120,7 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
     if (!added && bookmarks.includes(id)) {
       setAdded(true)
     }
-  }, [id, added, getBookmarks])
+  }, [id, added])
 
   return (
     <>
@@ -163,7 +160,7 @@ const ArticlePage: React.FC<ArticleContent> = (props) => {
         <BookmarkButton
           style={
             typeof window !== 'undefined'
-              ? { top: Number(window?.innerHeight) - 31.875 }
+              ? { top: Number(window?.innerHeight) - 29.875 }
               : {}
           }
           className={classNames(
