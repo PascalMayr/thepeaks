@@ -8,11 +8,31 @@ import clientApi from '../utils/clientApi'
 import getBookmarks from '../utils/getBookmarks'
 import styles from '../styles/pages/bookmarks.module.css'
 import { ArticleResult } from '../types'
+import { ParsedUrlQuery } from 'querystring'
+import sortArticles from '../utils/sortArticles'
 
-const Bookmarks: React.FC = () => {
+interface Query extends ParsedUrlQuery {
+  ['order-by']: string | undefined | string[]
+}
+
+export async function getServerSideProps({ query }: { query: Query }) {
+  return {
+    props: {
+      order: query['order-by'] || 'newest',
+    },
+  }
+}
+
+interface BookmarkProps {
+  order: string
+}
+
+const Bookmarks: React.FC<BookmarkProps> = ({ order }) => {
   const { loading, setLoading } = useContext(LoadingContext)
 
   const [articles, setArticles] = useState<ArticleResult[]>([])
+  /* sortin on client side since API isn't returning results with order-by query param */
+
   const fetchBookmarks = useCallback(async () => {
     const bookmarks = getBookmarks()
     setLoading(true)
@@ -21,12 +41,12 @@ const Bookmarks: React.FC = () => {
       body: JSON.stringify(bookmarks),
     })
     setLoading(false)
-    setArticles(results)
-  }, [setLoading])
+    setArticles(sortArticles(results, order) || [])
+  }, [setLoading, order])
 
   useEffect(() => {
     fetchBookmarks()
-  }, [fetchBookmarks])
+  }, [fetchBookmarks, order])
 
   /* prevent rerendering when loading state is updated */
   const Articles = useMemo(
