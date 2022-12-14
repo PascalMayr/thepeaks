@@ -20,14 +20,20 @@ export interface ArticleProps extends ArticleResult {
 const Article: React.FC<ArticleProps> = (props) => {
   const { id, variation, pillarName } = props
   return (
-    <Link
-      className={classNames(styles.link, styles[pillarName])}
-      href={`/article?id=${id}`}
-    >
-      {variation === ArticleVariation.SMALL && <ArticleSmall {...props} />}
-      {variation === ArticleVariation.NOIMAGE && <ArticleNoImage {...props} />}
-      {variation === ArticleVariation.BIG && <ArticleBig {...props} />}
-    </Link>
+    <>
+      {id && (
+        <Link
+          className={classNames(styles.link, styles[pillarName])}
+          href={`/article?id=${id}`}
+        >
+          {variation === ArticleVariation.SMALL && <ArticleSmall {...props} />}
+          {variation === ArticleVariation.NOIMAGE && (
+            <ArticleNoImage {...props} />
+          )}
+          {variation === ArticleVariation.BIG && <ArticleBig {...props} />}
+        </Link>
+      )}
+    </>
   )
 }
 
