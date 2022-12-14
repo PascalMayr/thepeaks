@@ -132,24 +132,45 @@ const Home: React.FC<HomeProps> = ({
             <Article {...news[6]} variation={ArticleVariation.BIG} />
             <Article {...news[7]} variation={ArticleVariation.BIG} />
           </section>
-          <SectionTitle title="Sports" />
-          <section className={styles['section-news']}>
-            <Article {...sport[0]} variation={ArticleVariation.SMALL} />
-            <Article {...sport[1]} variation={ArticleVariation.SMALL} />
-            <Article {...sport[2]} variation={ArticleVariation.SMALL} />
-          </section>
-          <SectionTitle title="Life & Style" />
-          <section className={styles['section-news']}>
-            <Article {...lifeandstyle[0]} variation={ArticleVariation.SMALL} />
-            <Article {...lifeandstyle[1]} variation={ArticleVariation.SMALL} />
-            <Article {...lifeandstyle[2]} variation={ArticleVariation.SMALL} />
-          </section>
-          <SectionTitle title="Culture" />
-          <section className={styles['section-news']}>
-            <Article {...culture[0]} variation={ArticleVariation.SMALL} />
-            <Article {...culture[1]} variation={ArticleVariation.SMALL} />
-            <Article {...culture[2]} variation={ArticleVariation.SMALL} />
-          </section>
+          {sport?.length > 0 && (
+            <>
+              <SectionTitle title="Sports" />
+              <section className={styles['section-news']}>
+                <Article {...sport[0]} variation={ArticleVariation.SMALL} />
+                <Article {...sport[1]} variation={ArticleVariation.SMALL} />
+                <Article {...sport[2]} variation={ArticleVariation.SMALL} />
+              </section>
+            </>
+          )}
+          {lifeandstyle?.length > 0 && (
+            <>
+              <SectionTitle title="Life & Style" />
+              <section className={styles['section-news']}>
+                <Article
+                  {...lifeandstyle[0]}
+                  variation={ArticleVariation.SMALL}
+                />
+                <Article
+                  {...lifeandstyle[1]}
+                  variation={ArticleVariation.SMALL}
+                />
+                <Article
+                  {...lifeandstyle[2]}
+                  variation={ArticleVariation.SMALL}
+                />
+              </section>
+            </>
+          )}
+          {culture?.length > 0 && (
+            <>
+              <SectionTitle title="Culture" />
+              <section className={styles['section-news']}>
+                <Article {...culture[0]} variation={ArticleVariation.SMALL} />
+                <Article {...culture[1]} variation={ArticleVariation.SMALL} />
+                <Article {...culture[2]} variation={ArticleVariation.SMALL} />
+              </section>
+            </>
+          )}
         </>
       )}
     </>
