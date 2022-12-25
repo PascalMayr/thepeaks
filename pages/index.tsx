@@ -32,7 +32,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
     ['show-fields']: 'thumbnail,trailText',
   }
   /* request theguardian API */
-  const news =
+  let news =
     (
       await api<ContentResponse>('search', {
         ...commonQuery,
@@ -41,6 +41,16 @@ export async function getServerSideProps({ query }: { query: Query }) {
         section: 'world|uk-news|australia-news|uk-news|us-news|news',
       })
     )?.response.results.map(remapApiFields<ArticleResult>) || null
+  if (!news?.length) {
+    news =
+      (
+        await api<ContentResponse>('search', {
+          ...commonQuery,
+          /* only section 'news' isn't returning articles */
+          section: 'world|uk-news|australia-news|uk-news|us-news|news',
+        })
+      )?.response.results.map(remapApiFields<ArticleResult>) || null
+  }
   const sport =
     (
       await api<ContentResponse>('search', {
